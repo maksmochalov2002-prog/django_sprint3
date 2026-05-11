@@ -6,7 +6,7 @@ from .models import Category, Location, Post
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'is_published', 'created_at')
     list_display_links = ('title',)
-    search_fields = ('title', 'description')
+    search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('is_published',)
     list_editable = ('is_published',)
@@ -23,9 +23,12 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'pub_date', 'author', 'category', 'location', 'is_published', 'created_at')
+    list_display = (
+        'title', 'pub_date', 'author', 'category',
+        'location', 'is_published', 'created_at'
+    )
     list_display_links = ('title',)
     search_fields = ('title', 'text')
-    list_filter = ('is_published', 'category', 'location', 'author')
+    list_filter = ('is_published', 'category', 'author')
     list_editable = ('is_published',)
     date_hierarchy = 'pub_date'
